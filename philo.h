@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnaiji <wnaiji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:52:37 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/10 18:14:22 by wnaiji           ###   ########.fr       */
+/*   Updated: 2023/07/12 16:57:39 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,7 @@
 # include <string.h>
 # include <sys/time.h>
 # include <pthread.h>
-
-typedef struct s_list
-{
-	pthread_t		th;
-	struct s_list	*prev;
-	struct s_list	*next;
-}			t_list;
+# include <stdlib.h>
 
 typedef struct s_arg
 {
@@ -34,6 +28,14 @@ typedef struct s_arg
 	int	time_sleep;
 	int	nbr_eat;
 }			t_arg;
+
+typedef struct s_philo
+{
+	int	name;
+	int	phork;
+	int	end_last_eat;
+	t_arg	arg;
+}			t_philo;
 
 //Outils libft:
 //outils_libft.c
@@ -46,12 +48,5 @@ int		ft_atoi(const char *str);
 //parsing.c
 void	check_arg(char **argv);
 t_arg	init_arg(char **argv);
-
-//Gestion des listes:
-//ft_list.c
-void	*ft_add_front_list(t_list *list, char *line);
-void	*ft_add_back_list(t_list *list, char *line);		//adapter toute les fonction pour les philos
-void	*ft_delete_in_head(t_list *list);
-char	*ft_last_content(t_list *list);
 
 #endif

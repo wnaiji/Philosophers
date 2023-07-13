@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   outils_libft.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnaiji <wnaiji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:52:16 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/10 12:59:40 by wnaiji           ###   ########.fr       */
+/*   Updated: 2023/07/12 13:49:48 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 int	ft_isdigit(int c)
 {
-	if (c >= '0' && c <= '9' || c == '+')
+	if ((c >= '0' && c <= '9') || c == '+')
 		return (c);
 	else
 		return (0);
