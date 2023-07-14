@@ -6,7 +6,7 @@
 /*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:51:34 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/13 10:46:44 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/14 21:38:23 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,48 @@
 void	*routine(void *arg)
 {
 	t_philo *philo;
+	int		i;
 
+	i = 0;
 	philo = (t_philo *)arg;
-	printf("je suis dans le philo %d\n", philo->name);
+	while (i++ < 5)
+	{
+		if (pthread_mutex_lock(&philo->phork) == 0
+			&& pthread_mutex_lock(philo->phork_r) == 0)
+		{
+			printf("%d is eating\n", philo->name);
+			sleep(philo->arg.time_eat);
+			pthread_mutex_unlock(&philo->phork);
+			pthread_mutex_unlock(philo->phork_r);
+			printf("%d is sleeping\n", philo->name);
+			sleep(philo->arg.time_sleep);
+		}
+		else
+			printf("%d is thinking\n", philo->name);
+	}
 	return (NULL);
 }
 
 void	create_thread(t_arg arg)
 {
 	int			i;
-	pthread_t	th[arg.nbr_philo];
+	t_philo		philo[arg.nbr_philo];
 
 	i = 0;
 	while (i < arg.nbr_philo)
 	{
-		t_philo		*philo;
-
-		philo = malloc(sizeof(t_philo));
-		philo->name = i + 1;
-		philo->arg = arg;
-		pthread_create(&th[i], NULL, routine, (void *)philo);
+		pthread_mutex_init(&philo[i].phork, NULL);
+		philo[i].name = i + 1;
+		philo[i].arg = arg;
+		philo[i].phork_r = &philo[(i + 1) % arg.nbr_philo].phork;
+		pthread_create(&(philo[i].th), NULL, routine, &(philo[i]));
 		i++;
 	}
 	i = 0;
-	while (i <= arg.nbr_philo)
+	while (i < arg.nbr_philo)
 	{
-		if (pthread_join(th[i], NULL) != 0)
+		pthread_join(philo[i].th, NULL);
+		pthread_mutex_destroy(&philo[i].phork);
 		i++;
 	}
 }

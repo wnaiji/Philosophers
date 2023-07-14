@@ -6,7 +6,7 @@
 /*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:52:37 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/12 16:57:39 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/14 19:32:31 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ typedef struct s_arg
 
 typedef struct s_philo
 {
-	int	name;
-	int	phork;
-	int	end_last_eat;
-	t_arg	arg;
+	int				name;
+	int				end_last_eat;
+	pthread_mutex_t	phork;
+	pthread_mutex_t	*phork_r;
+	pthread_t		th;
+	t_arg			arg;
 }			t_philo;
 
 //Outils libft:
 //outils_libft.c
-void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t nmemb, size_t size);
 int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 
