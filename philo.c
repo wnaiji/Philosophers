@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
+/*   By: wnaiji <wnaiji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:53:07 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/15 20:33:40 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/15 22:15:36 by wnaiji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	destroy_thread(t_philo *philo, t_arg arg)
 
 void	is_dead(t_philo philo, t_arg arg)
 {
-	if (philo.end_last_eat > time_now())
+	long int	real_time;
+
+	real_time = time_now() - philo.end_last_eat;
+	if (real_time > philo.arg.time_die)
 	{
 		printf("%ld %d died\n", time_now(), philo.name);
 		arg.dead = 1;
@@ -40,11 +43,11 @@ t_philo	*eating_and_sleeping(t_philo *philo)
 	printf("%ld %d has taken a fork\n", time_now(), philo->name);
 	printf("%ld %d has taken a fork\n", time_now(),philo->name);
 	printf("%ld %d is eating\n", time_now(), philo->name);
-	sleep(philo->arg.time_eat);
+	usleep(philo->arg.time_eat);
 	pthread_mutex_unlock(&philo->phork);
 	pthread_mutex_unlock(philo->phork_r);
 	printf("%ld %d is sleeping\n", time_now(), philo->name);
-	sleep(philo->arg.time_sleep);
+	usleep(philo->arg.time_sleep);
 	return (philo);
 }
 
@@ -63,8 +66,8 @@ void	*routine(void *arg)
 		}
 		printf("%ld %d is thinking\n", time_now(), philo->name);
 		is_dead(*philo, philo->arg);
-		//if (philo->arg.dead == 1)
-		//	break ;
+		if (philo->arg.dead == 1)
+			break ;
 	}
 	return (NULL);
 }
