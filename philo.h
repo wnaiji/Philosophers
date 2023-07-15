@@ -6,7 +6,7 @@
 /*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:52:37 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/14 19:32:31 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/15 20:28:22 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ typedef struct s_arg
 	int	time_eat;
 	int	time_sleep;
 	int	nbr_eat;
+	int	dead;
 }			t_arg;
 
 typedef struct s_philo
 {
 	int				name;
-	int				end_last_eat;
+	long int		end_last_eat;
 	pthread_mutex_t	phork;
 	pthread_mutex_t	*phork_r;
 	pthread_t		th;
@@ -43,10 +44,20 @@ typedef struct s_philo
 //outils_libft.c
 int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
+long int	time_now(void);
 
 //Parsing:
 //parsing.c
 void	check_arg(char **argv);
 t_arg	init_arg(char **argv);
+
+//Création des philos:
+//philo.c
+void	*routine(void *arg);
+void	create_thread(t_arg arg);
+t_philo	*eating_and_sleeping(t_philo *philo);
+void	is_dead(t_philo philo, t_arg arg);
+void	destroy_thread(t_philo *philo, t_arg arg);
+
 
 #endif

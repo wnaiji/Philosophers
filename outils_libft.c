@@ -6,7 +6,7 @@
 /*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:52:16 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/13 12:04:09 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/15 20:28:12 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +45,10 @@ int	ft_atoi(const char *str)
 	return (result = result * sign);
 }
 
+long int	time_now(void)
+{
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	return (now.tv_usec / 1000);
+}
