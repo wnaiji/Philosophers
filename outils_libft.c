@@ -6,7 +6,7 @@
 /*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:52:16 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/15 20:28:12 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/15 22:23:26 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,14 @@ long int	time_now(void)
 
 	gettimeofday(&now, NULL);
 	return (now.tv_usec / 1000);
+}
+
+int	ft_usleep(long int time)
+{
+	long int	start_time;
+
+	start_time = time_now();
+	while ((time_now() - start_time) < time)
+		usleep(150);
+	return (1);
 }
