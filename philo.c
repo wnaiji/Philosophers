@@ -6,7 +6,7 @@
 /*   By: wnaiji <wnaiji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:53:07 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/15 23:30:08 by wnaiji           ###   ########.fr       */
+/*   Updated: 2023/07/16 07:55:27 by wnaiji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ void	*routine(void *arg)
 			printf("%ld %d has taken a fork\n", time_now(), philo->name);
 			printf("%ld %d has taken a fork\n", time_now(),philo->name);
 			printf("%ld %d is eating\n", time_now(), philo->name);
+			philo->meal++;
 			usleep(philo->arg.time_eat);
 			pthread_mutex_unlock(&philo->phork);
 			pthread_mutex_unlock(philo->phork_r);
+			if (philo->meal == philo->arg.nbr_eat)
+				break ;
 			printf("%ld %d is sleeping\n", time_now(), philo->name);
 			usleep(philo->arg.time_sleep);
 			philo->end_last_eat = time_now();

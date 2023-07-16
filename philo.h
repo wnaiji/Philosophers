@@ -6,7 +6,7 @@
 /*   By: wnaiji <wnaiji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:52:37 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/15 23:24:26 by wnaiji           ###   ########.fr       */
+/*   Updated: 2023/07/16 07:51:30 by wnaiji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_philo
 	pthread_mutex_t	*phork_r;
 	pthread_t		th;
 	t_arg			arg;
+	int				meal;
 }			t_philo;
 
 //Outils libft:
