@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
+/*   By: wnaiji <wnaiji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:53:07 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/15 22:20:56 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/15 23:30:08 by wnaiji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,19 @@ void	*routine(void *arg)
 		if (pthread_mutex_lock(&philo->phork) == 0
 			&& pthread_mutex_lock(philo->phork_r) == 0)
 		{
-			philo = eating_and_sleeping(philo);
+			printf("%ld %d has taken a fork\n", time_now(), philo->name);
+			printf("%ld %d has taken a fork\n", time_now(),philo->name);
+			printf("%ld %d is eating\n", time_now(), philo->name);
+			usleep(philo->arg.time_eat);
+			pthread_mutex_unlock(&philo->phork);
+			pthread_mutex_unlock(philo->phork_r);
+			printf("%ld %d is sleeping\n", time_now(), philo->name);
+			usleep(philo->arg.time_sleep);
 			philo->end_last_eat = time_now();
 		}
 		printf("%ld %d is thinking\n", time_now(), philo->name);
-		is_dead(*philo, philo->arg);
+		if (philo->end_last_eat != 0)
+			is_dead(*philo, philo->arg);
 		if (philo->arg.dead == 1)
 			break ;
 	}
@@ -84,6 +92,7 @@ void	create_thread(t_arg arg)
 		philo[i].name = i + 1;
 		philo[i].arg = arg;
 		philo[i].phork_r = &philo[(i + 1) % arg.nbr_philo].phork;
+		philo[i].end_last_eat = 0;
 		pthread_create(&(philo[i].th), NULL, routine, &(philo[i]));
 		i++;
 	}

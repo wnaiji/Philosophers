@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
+/*   By: wnaiji <wnaiji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:52:37 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/15 20:28:22 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/15 23:24:26 by wnaiji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_philo
 int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 long int	time_now(void);
+int	ft_usleep(long int time);
 
 //Parsing:
 //parsing.c

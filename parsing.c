@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
+/*   By: wnaiji <wnaiji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:51:53 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/14 21:58:35 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/16 07:17:41 by wnaiji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	check_arg(char **argv)
 	j = 0;
 	while (argv[++i])
 	{
+		j = 0;
 		while (argv[i][j])
 		{
 			if (ft_isdigit(argv[i][j]) == 0)
