@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnaiji <wnaiji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:52:37 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/16 07:51:30 by wnaiji           ###   ########.fr       */
+/*   Updated: 2023/07/19 19:18:05 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,29 @@ typedef struct s_philo
 	pthread_mutex_t	phork;
 	pthread_mutex_t	*phork_r;
 	pthread_t		th;
-	t_arg			arg;
+	t_arg			*arg;
 	int				meal;
 }			t_philo;
 
 //Outils libft:
 //outils_libft.c
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
+int			ft_isdigit(int c);
+int			ft_atoi(const char *str);
 long int	time_now(void);
-int	ft_usleep(long int time);
+int			ft_usleep(long int time);
 
 //Parsing:
 //parsing.c
-void	check_arg(char **argv);
-t_arg	init_arg(char **argv);
+void		check_arg(char **argv);
+t_arg		*init_arg(char **argv, t_arg *arg);
 
 //Création des philos:
 //philo.c
-void	*routine(void *arg);
-void	create_thread(t_arg arg);
-t_philo	*eating_and_sleeping(t_philo *philo);
-void	is_dead(t_philo philo, t_arg arg);
-void	destroy_thread(t_philo *philo, t_arg arg);
+void		*routine(void *arg);
+void		create_thread(t_arg *arg);
+t_philo		*eating_and_sleeping(t_philo *philo);
+t_philo		*is_dead(t_philo *philo);
+void		destroy_thread(t_philo *philo, t_arg *arg);
 
 
 #endif

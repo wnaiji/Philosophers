@@ -6,7 +6,7 @@
 /*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:52:16 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/15 22:23:26 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/19 14:33:16 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ long int	time_now(void)
 
 int	ft_usleep(long int time)
 {
+//adapté la fonction...
 	long int	start_time;
 
 	start_time = time_now();
