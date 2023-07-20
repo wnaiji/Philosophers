@@ -6,7 +6,7 @@
 /*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:51:53 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/19 14:41:36 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/20 16:55:59 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	check_arg(char **argv)
 	}
 }
 
-t_arg	*init_arg(char **argv, t_arg *arg)
+t_arg	*init_arg(char **argv, t_arg **arg)
 {
 	int		i;
 
@@ -50,16 +50,17 @@ t_arg	*init_arg(char **argv, t_arg *arg)
 	while (argv[i])
 	{
 		if (i == 1)
-			arg->nbr_philo = ft_atoi(argv[i]);
+			(*arg)->nbr_philo = ft_atoi(argv[i]);
 		else if (i == 2)
-			arg->time_die = ft_atoi(argv[i]);
+			(*arg)->time_die = ft_atoi(argv[i]);
 		else if (i == 3)
-			arg->time_eat = ft_atoi(argv[i]);
+			(*arg)->time_eat = ft_atoi(argv[i]);
 		else if (i == 4)
-			arg->time_sleep = ft_atoi(argv[i]);
+			(*arg)->time_sleep = ft_atoi(argv[i]);
 		else if (i == 5)
-			arg->nbr_eat = ft_atoi(argv[i]);
+			(*arg)->nbr_eat = ft_atoi(argv[i]);
 		i++;
 	}
-	return (arg);
+	pthread_mutex_init(&(*arg)->mdead, NULL);
+	return (*arg);
 }

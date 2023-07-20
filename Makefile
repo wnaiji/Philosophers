@@ -6,13 +6,13 @@
 #    By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/11 11:42:09 by wnaiji            #+#    #+#              #
-#    Updated: 2023/07/12 17:12:33 by walidnaiji       ###   ########.fr        #
+#    Updated: 2023/07/20 15:51:43 by walidnaiji       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = main.c \
 	parsing.c \
-	outils_libft.c \
+	outils.c \
 	philo.c \
 
 OBJ_DIR = obj
