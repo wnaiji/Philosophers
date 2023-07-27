@@ -6,7 +6,7 @@
 /*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:53:07 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/20 17:43:21 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/07/21 14:19:56 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		if (philo->end_last_eat != 0)
-			philo = is_dead(philo);
+		philo = is_dead(philo);
 		if (philo->arg->dead == 1)
 			break ;
 		if (pthread_mutex_lock(&philo->phork) == 0
@@ -72,8 +71,9 @@ void	*routine(void *arg)
 			printf("%ld %d is sleeping\n", time_now(), philo->name);
 			usleep(philo->arg->time_sleep * 1000);
 		}
-		//if (philo->arg->dead == 1)
-		//	break ;
+		philo = is_dead(philo);
+		if (philo->arg->dead == 1)
+			break ;
 		printf("%ld %d is thinking\n", time_now(), philo->name);
 	}
 	return (NULL);
