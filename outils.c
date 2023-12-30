@@ -6,15 +6,35 @@
 /*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:52:16 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/07/21 15:39:58 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/12/28 12:39:58 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+	ft_putchar_fd('\n', fd);
+}
+
 int	ft_isdigit(int c)
 {
-	if ((c >= '0' && c <= '9') || c == '+')
+	if (c >= '0' && c <= '9')
 		return (c);
 	else
 		return (0);
@@ -29,6 +49,8 @@ int	ft_atoi(const char *str)
 	sign = 1;
 	result = 0;
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
@@ -43,23 +65,4 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (result = result * sign);
-}
-
-long int	time_now(void)
-{
-	struct timeval	now;
-
-	gettimeofday(&now, NULL);
-	return (now.tv_usec / 1000);
-}
-
-int	ft_usleep(long int time)
-{
-//adapté la fonction...
-	long int	start_time;
-
-	start_time = time_now();
-	while ((time_now() - start_time) < time)
-		usleep(150);
-	return (1);
 }
