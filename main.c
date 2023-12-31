@@ -6,13 +6,13 @@
 /*   By: walidnaiji <walidnaiji@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:51:34 by wnaiji            #+#    #+#             */
-/*   Updated: 2023/12/28 21:16:07 by walidnaiji       ###   ########.fr       */
+/*   Updated: 2023/12/31 03:24:16 by walidnaiji       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	pars_arg(char **argv)
+static void	pars_arg(char **argv)
 {
 	int	i;
 	int	j;
@@ -41,7 +41,7 @@ void	pars_arg(char **argv)
 	}
 }
 
-t_arg	*init_arg(char **argv, t_arg *arg)
+static t_arg	*init_arg(char **argv, t_arg *arg)
 {
 	int		i;
 
@@ -49,14 +49,7 @@ t_arg	*init_arg(char **argv, t_arg *arg)
 	while (argv[i])
 	{
 		if (i == 1)
-		{
 			arg->nbr_philo = ft_atoi(argv[i]);
-			if (arg->nbr_philo == 1)
-			{
-				ft_putendl_fd("The program does't work with a single philo", 2);
-				exit(EXIT_FAILURE);
-			}
-		}
 		else if (i == 2)
 			arg->time_die = ft_atoi(argv[i]);
 		else if (i == 3)
@@ -70,16 +63,11 @@ t_arg	*init_arg(char **argv, t_arg *arg)
 	return (arg);
 }
 
-//////////PRINT ARG//////////
-
-void	print_arg(t_arg *arg)
+static void	print_single_philo(t_arg *arg)
 {
-	printf("NB PHILO:	%d#\n", arg->nbr_philo);
-	printf("NB PHILO:	%d#\n", arg->time_die);
-	printf("NB PHILO:	%d#\n", arg->time_eat);
-	printf("NB PHILO:	%d#\n", arg->time_sleep);
-	if (arg->nbr_eat)
-		printf("NB PHILO:	%d#\n", arg->nbr_eat);
+	printf(TIME"0	"PHILO"1 "FORK END"\n");
+	printf(DIE"%d	1 "DIED END"\n", arg->time_die + 1);
+	exit(EXIT_FAILURE);
 }
 
 int	main(int argc, char **argv)
@@ -93,6 +81,8 @@ int	main(int argc, char **argv)
 	{
 		pars_arg(argv);
 		arg = init_arg(argv, arg);
+		if (arg->nbr_philo == 1)
+			print_single_philo(arg);
 		arg->time_start = time_now();
 		philo(arg);
 	}
